@@ -7,12 +7,12 @@ public class JavaMatematica {
     
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
-
+        // quantidade de bombons por receita = qtdBom = 50
          //i1= chocolate meio amargo | i2= leite condencado | i3= margarina | i4= leite em po | i5= cafe soluvel | i6= coco ralado
          // Receita definida: choc = 400g, leitcond = 395g, marg = 40g, leitpoR1 = 50g, cafeR2 = 100g, cocoR3 = 300g;
-         //pi1= preço do chocolate comproda | p2...
+         //pi1= preço do chocolate comproda | pi2...
          //e1 = estoque de chocolate em grama | e2...
-         //preco1 = qtdade em reais de um ingrediente...
+         //preco1 = custo do chocolate...
          //custoR = custo limite de uma receita. 
          //precoV = de venda.
          //qtdI1 = quantidade comprada em grama de cada ingreediente.
@@ -37,8 +37,8 @@ public class JavaMatematica {
          
          float pi1 = 0, pi2 = 0, pi3 = 0, pi4 = 0, pi5 = 0, pi6 = 0;
          float preco1 = 0, preco2 = 0, preco3 = 0, preco4 = 0, preco5 = 0, preco6 = 0;
-         float custoR = 0, precoV, lucro = 0, rec1 = 0, rec2 = 0, rec3 = 0;
-         
+         float custoR = 0, precoV, lucroTotal = 0, qtdBom = 50, rec1 = 0, rec2 = 0, rec3 = 0;
+         float lucroUnidR1 = 0, lucroUnidR2 = 0, lucroUnidR3 = 0;
         
 
          System.out.println("O MELHOR BOMBOM DE GOIANIA");
@@ -75,37 +75,37 @@ public class JavaMatematica {
          qtdI1 = ler.nextInt();
          e1 = e1 + qtdI1 - choc;
          System.out.println("Sua quantidade de chocolate restante é " + e1 + "g.");
-         e1 = ler.nextInt();
+         
          
          System.out.printf("Digite quantos gramas de leite condensado comprado. ", qtdI2);
          qtdI2 = ler.nextInt();
          e2 = e2 + qtdI2 - leitcond;
          System.out.println("Sua quantidade de leite condensado restante é " + e2 + "g.");
-         e2 = ler.nextInt();
+         
          
          System.out.printf("Digite quantos gramas de margarina comprado. ", qtdI3);
          qtdI3 = ler.nextInt();
          e3 = e3 + qtdI3 - marg;
          System.out.println("Sua quantidade de margarina restante é " + e3 + "g.");
-         e3 = ler.nextInt();
+         
          
          System.out.printf("Digite quantos gramas de leite em po comprado. ", qtdI4);
          qtdI4 = ler.nextInt();
          e4 = e4 + qtdI4 - leitpoR1;
          System.out.println("Sua quantidade de leite em pó restante é " + e4 + "g.");
-         e4 = ler.nextInt();
+        
          
          System.out.printf("Digite quantos gramas de cafe soluvel comprado. ", qtdI5);
          qtdI5 = ler.nextInt();
          e5 = e5 + qtdI5 - cafeR2;
          System.out.println("Sua quantidade de café soluvel restante é " + e5 + "g.");
-         e5 = ler.nextInt();
+         
          
          System.out.printf("Digite quantos gramas de coco ralado comprado. ", qtdI6);
          qtdI6 = ler.nextInt();
          e6 = e6 + qtdI6 - cocoR3;
          System.out.println("Sua quantidade de coco ralado restante é " + e6 + "g.");
-         e6 = ler.nextInt();
+        
          
          preco1 = pi1 / qtdI1 * e1; // preco do produto ingred comprado x qtde do mesmo em grama Ex: 400 * 5 reais
          preco2 = qtdI2 * pi2;
@@ -114,7 +114,7 @@ public class JavaMatematica {
          preco5 = qtdI5 * pi5;
          preco6 = qtdI6 * pi6;
          
-         while (e1 >= choc && e2 >= leitcond && e3 >= marg && e4 >= leitpoR1){
+         if (e1 >= choc && e2 >= leitcond && e3 >= marg && e4 >= leitpoR1){
              System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de Leite Ninho. ");
              if(e1 >= choc*2 && e2 >= leitcond*2 && e3 >= marg*2 && e4 >= leitpoR1*2){
                  System.out.println("Temos ingredientes suficientes para 2 receita de BomBom de Leite Ninho. ");
@@ -122,7 +122,7 @@ public class JavaMatematica {
                  System.out.println("Temos ingredientes suficientes para 3 receita de BomBom de Leite Ninho. ");
             }
          }   
-         while (e2 >= choc && e2 >= leitcond && e3 >= marg && e5 >= cafeR2){
+         if (e2 >= choc && e2 >= leitcond && e3 >= marg && e5 >= cafeR2){
              System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de Cafe. ");
              if(e2 >= choc*2 && e2 >= leitcond*2 && e3 >= marg*2 && e5 >= cafeR2*2){
                  System.out.println("Temos ingredientes suficientes para 2 receita de BomBom de Cafe. ");
@@ -130,7 +130,7 @@ public class JavaMatematica {
                  System.out.println("Temos ingredientes suficientes para 3 receita de BomBom de Cafe. ");
             }
          }
-         while (e3 >= choc && e2 >= leitcond && e3 >= marg && e6 >= cocoR3){
+         if (e3 >= choc && e2 >= leitcond && e3 >= marg && e6 >= cocoR3){
              System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de coco. ");
              if(e3 >= choc*2 && e2 >= leitcond*2 && e3 >= marg*2 && e6 >= cocoR3*2){
                  System.out.println("Temos ingredientes suficientes para 2 receita de BomBom de coco. ");
@@ -139,13 +139,27 @@ public class JavaMatematica {
              }
          }
          
+         float custoR1 = 0, custoR2 = 0, custoR3 = 0, qtdbombomR = 50;
+         float custobombomR1 = 0, custobombomR2 = 0, custobombomR3 = 0;
+         float custochoc1 = (pi1/qtdI1) * choc, custoleitcond2 = (pi2/qtdI2) * leitcond, customarg3 = (pi3/qtdI3) * marg, custoleitpo4 = (pi4/qtdI4) * leitpoR1, custocafe5 = (pi5/qtdI5) * cafeR2, custococo6 = (pi6/qtdI6) * cocoR3;
          
-         
-         System.out.print("Defina o preço de venda por unidade/bombom em uma receita: ");
+         System.out.print("Defina/digite o preço de venda por unidade/bombom em uma receita: ");
              precoV = ler.nextInt();
              
-             lucro = precoV - custoR;
+             custoR1 = custochoc1 + custoleitcond2 + customarg3 + custoleitpo4; 
+             custoR2 = custochoc1 + custoleitcond2 + customarg3 + custocafe5;    
+             custoR3 = custochoc1 + custoleitcond2 + customarg3 + custococo6;
              
+             custobombomR1 = custoR1/qtdbombomR; //custo da receita 1 dividido pela quantidade de bombom que são 50 por receita.
+             custobombomR2 = custoR2/qtdbombomR;
+             custobombomR3 = custoR3/qtdbombomR;
+             
+             lucroUnidR1 = precoV - custobombomR1;
+             lucroUnidR2 = precoV - custobombomR2;
+             lucroUnidR2 = precoV - custobombomR3;
+             
+             
+             lucroTotal = lucroUnidR1 + lucroUnidR2 + lucroUnidR3;
        
     }
 }
