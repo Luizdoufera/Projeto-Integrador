@@ -150,16 +150,32 @@ public class JavaMatematica {
              custoR2 = custochoc1 + custoleitcond2 + customarg3 + custocafe5;    
              custoR3 = custochoc1 + custoleitcond2 + customarg3 + custococo6;
              
-             custobombomR1 = custoR1/qtdbombomR; //custo da receita 1 dividido pela quantidade de bombom que são 50 por receita.
-             custobombomR2 = custoR2/qtdbombomR;
-             custobombomR3 = custoR3/qtdbombomR;
+             custobombomR1 = (custoR1/qtdbombomR); //custo da receita 1 dividido pela quantidade de bombom que são 50 por receita.
+             custobombomR2 = (custoR2/qtdbombomR);
+             custobombomR3 = (custoR3/qtdbombomR);
              
-             lucroUnidR1 = precoV - custobombomR1;
-             lucroUnidR2 = precoV - custobombomR2;
-             lucroUnidR2 = precoV - custobombomR3;
+             int qtvendidaR1 = 0, qtvendidaR2 = 0, qtvendidaR3 = 0;
+             int registroVendaR1, registroVendaR2, registroVendaR3;
+             
+             System.out.print("Bombons de chocolates vendidos: ");
+             qtvendidaR1 = ler.nextInt();
+             registroVendaR1 = qtvendidaR1;
+             
+             System.out.print("Bombons de cafe vendidos: ");
+             qtvendidaR2 = ler.nextInt();
+             registroVendaR2 = qtvendidaR2;
+             
+             System.out.print("Bombons de coco vendidos: ");
+             qtvendidaR3 = ler.nextInt();
+             registroVendaR3 = qtvendidaR3;
+             
+             lucroUnidR1 = precoV - custobombomR1 * qtvendidaR1;
+             lucroUnidR2 = precoV - custobombomR2 * qtvendidaR2;
+             lucroUnidR3 = precoV - custobombomR3 * qtvendidaR3;
              
              
              lucroTotal = lucroUnidR1 + lucroUnidR2 + lucroUnidR3;
+       
        
     }
 }
