@@ -114,34 +114,43 @@ public class JavaMatematica {
          preco5 = qtdI5 * pi5;
          preco6 = qtdI6 * pi6;
          
-         if (qtdI1 + e1 >= choc && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI4 + e4 >= leitpoR1) {
+         if (qtdI1 + e1 >= choc && qtdI1 + e1 < choc * 2 && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI4 + e4 >= leitpoR1) {
             System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de Leite Ninho. ");
         }
-        if (qtdI1 + e1 >= choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI4 + e4 >= leitpoR1 * 2) {
+        if (qtdI1 + e1 >= choc * 2 && qtdI1 + e1 < choc * 3 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI4 + e4 >= leitpoR1 * 2) {
             System.out.println("Temos ingredientes suficientes para 2 receita de BomBom de Leite Ninho. ");
         }
         if (qtdI1 + e1 >= choc * 3 && qtdI2 + e2 >= leitcond * 3 && qtdI3 + e3 >= marg * 3 && qtdI4 + e4 >= leitpoR1 * 3) {
             System.out.println("Temos ingredientes suficientes para 3 receita de BomBom de Leite Ninho. ");
         }
 
-        if (qtdI1 + e1 >= choc && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI5 + e5 >= cafeR2) {
+        if (qtdI1 + e1 >= choc && qtdI1 + e1 < choc * 2 && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI5 + e5 >= cafeR2) {
             System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de Cafe. ");
         }
-        if (qtdI1 + e1 >= choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI5 + e5 >= cafeR2 * 2) {
+        if (qtdI1 + e1 >= choc * 2 && qtdI1 + e1 < choc * 3 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI5 + e5 >= cafeR2 * 2) {
             System.out.println("Temos ingredientes suficientes para 2 receita de BomBom de Cafe. ");
         }
         if (qtdI1 + e1 >= choc * 3 && qtdI2 + e2 >= leitcond * 3 && qtdI3 + e3 >= marg * 3 && qtdI5 + e5 >= cafeR2 * 3) {
             System.out.println("Temos ingredientes suficientes para 3 receita de BomBom de Cafe. ");
         }
 
-        if (qtdI1 + e1 >= choc && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI6 + e6 >= cocoR3) {
+        if (qtdI1 + e1 >= choc && qtdI1 + e1 < choc * 2 && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI6 + e6 >= cocoR3) {
             System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de coco. ");
         }
-        if (qtdI1 + e1 >= choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI6 + e6 >= cocoR3 * 2) {
+        if (qtdI1 + e1 >= choc * 2 && qtdI1 + e1 < choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI6 + e6 >= cocoR3 * 2) {
             System.out.println("Temos ingredientes suficientes para 2 receita de BomBom de coco. ");
         }
         if (qtdI1 + e1 >= choc * 3 && qtdI2 + e2 >= leitcond * 3 && qtdI3 + e3 >= marg * 3 && qtdI6 + e6 >= cocoR3 * 3) {
             System.out.println("Temos ingredientes suficientes para 3 receita de BomBom de coco. ");
+        }
+        if (qtdI1 + e1 < choc || qtdI2 + e2 < leitcond || qtdI3 + e3 < marg || qtdI4 + e4 < leitpoR1){
+            System.out.println("Não á ingredientes para fazer nenhuma recheita de BomBom de Leite Ninho. ");
+        }
+        if (qtdI1 + e1 < choc || qtdI2 + e2 < leitcond || qtdI3 + e3 < marg || qtdI5 + e5 < cafeR2){
+            System.out.println("Não á ingredientes para fazer nenhuma recheita de BomBom de Café. ");
+        }
+        if (qtdI1 + e1 < choc || qtdI2 + e2 < leitcond || qtdI3 + e3 < marg || qtdI6 + e6 < cocoR3){
+            System.out.println("Não á ingredientes para fazer nenhuma recheita de BomBom de coco. ");
         }
          
          float custoR1 = 0, custoR2 = 0, custoR3 = 0, qtdbombomR = 50;
