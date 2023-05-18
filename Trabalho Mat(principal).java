@@ -79,41 +79,24 @@ public class JavaMatematica {
          System.out.println("\nOlá! Abaixo digite o peso dos produtos em grama.");
          System.out.println("--------------------------------------------------\n");
          
-
+        
          System.out.print("Digite quantos gramas de chocolate comprado: ");
          qtdI1 = ler.nextInt();
-         e1 = e1 + qtdI1;
-         System.out.println("Sua quantidade de chocolate restante é " + e1 + "g.");
-         
          
          System.out.print("Digite quantos gramas de leite condensado comprado: ");
          qtdI2 = ler.nextInt();
-         e2 = e2 + qtdI2;
-         System.out.println("Sua quantidade de leite condensado restante é " + e2 + "g.");
-         
          
          System.out.print("Digite quantos gramas de margarina comprado: ");
          qtdI3 = ler.nextInt();
-         e3 = e3 + qtdI3;
-         System.out.println("Sua quantidade de margarina restante é " + e3 + "g.");
-         
          
          System.out.print("Digite quantos gramas de leite em po comprado: ");
          qtdI4 = ler.nextInt();
-         e4 = e4 + qtdI4;
-         System.out.println("Sua quantidade de leite em pó restante é " + e4 + "g.");
-        
          
          System.out.print("Digite quantos gramas de cafe soluvel comprado: ");
          qtdI5 = ler.nextInt();
-         e5 = e5 + qtdI5;
-         System.out.println("Sua quantidade de café soluvel restante é " + e5 + "g.");
-         
          
          System.out.print("Digite quantos gramas de coco ralado comprado: ");
          qtdI6 = ler.nextInt();
-         e6 = e6 + qtdI6;
-         System.out.println("Sua quantidade de coco ralado restante é " + e6 + "g.");
         
          System.out.print("---------------------------------------------------\n");
          
@@ -125,6 +108,7 @@ public class JavaMatematica {
          //preco5 = qtdI5 * pi5;
          //preco6 = qtdI6 * pi6;
          
+        // À seguir a implementação para conferir se a ou não possibilidade de fazer alguma receita   
         int quantre1;
         quantre1 = Math.min(qtdI1 / choc,
                 Math.min(qtdI2 / leitcond,
@@ -153,8 +137,31 @@ public class JavaMatematica {
          if (quantre1 < 1){ 
         System.out.println("Não é possivel fazer nenhuma recheita de BomBom de coco");}
          
+        System.out.print("\nEstoque remanecente: \n");
         System.out.print("------------------------------------------------------------\n");
         
+        e1 = qtdI1 - choc * quantre1;
+         System.out.println("Sua quantidade de chocolate restante é " + e1 + "g.");
+         
+         e2 = qtdI2 - leitcond * quantre1;
+         System.out.println("Sua quantidade de leite condensado restante é " + e2 + "g.");
+         
+         e3 = qtdI3 - marg * quantre1;
+         System.out.println("Sua quantidade de margarina restante é " + e3 + "g.");
+         
+         e4 = qtdI4 - leitpoR1 * quantre1;
+         System.out.println("Sua quantidade de leite em pó restante é " + e4 + "g.");
+         
+         e5 = qtdI5 - cafeR2 * quantre2;
+         System.out.println("Sua quantidade de café soluvel restante é " + e5 + "g.");
+         
+         e6 = qtdI6 - cocoR3 * quantre3;
+         System.out.println("Sua quantidade de coco ralado restante é " + e6 + "g.");
+         
+         
+        System.out.print("------------------------------------------------------------\n");
+        //custoR1 = a custo unitatio de cada BomBom...
+        //custochoc1 = custo de cada ingrediente ...
          float custoR1, custoR2, custoR3, qtdbombomR = 50;
          float custobombomR1, custobombomR2, custobombomR3;
          float custochoc1 = (pi1/qtdI1) * choc, custoleitcond2 = (pi2/qtdI2) * leitcond, customarg3 = (pi3/qtdI3) * marg, custoleitpo4 = (pi4/qtdI4) * leitpoR1, custocafe5 = (pi5/qtdI5) * cafeR2, custococo6 = (pi6/qtdI6) * cocoR3;
@@ -162,7 +169,7 @@ public class JavaMatematica {
         System.out.printf("Defina/digite o preço de venda por unidade/bombom em uma receita R$ : ");
         precoV = ler.nextFloat();
              
-             
+        //custo total de todos os ingrediente      
         custoR1 = custochoc1 + custoleitcond2 + customarg3 + custoleitpo4; 
         custoR2 = custochoc1 + custoleitcond2 + customarg3 + custocafe5;    
         custoR3 = custochoc1 + custoleitcond2 + customarg3 + custococo6;
@@ -189,7 +196,7 @@ public class JavaMatematica {
         qtvendidaR3 = ler.nextInt();
         
         System.out.print("---------------------------------------------------\n");     
-             
+        // lucro de unidade vendida      
         lucroUnidR1 = precoV - custobombomR1;
         System.out.println("Lucro unitário das vendas de Bombons de Chocolate: R$ " + lucroUnidR1);
         lucroUnidR2 = precoV - custobombomR2;
@@ -200,7 +207,7 @@ public class JavaMatematica {
         System.out.print("---------------------------------------------------\n"); 
         
         float lucroTotalR1, lucroTotalR2, lucroTotalR3;
-        
+        // lucro de cada receita pela quantidade de BomBons vendidos 
         lucroTotalR1 = (lucroUnidR1 * qtvendidaR1);
         System.out.println("O lucro TOTAL de vendas de Bombons de Chocolate é: R$ " + lucroTotalR1);
         lucroTotalR2 = (lucroUnidR2 * qtvendidaR2);
@@ -209,7 +216,7 @@ public class JavaMatematica {
         System.out.println("O lucro TOTAL de vendas de Bombons de Coco é: R$ " + lucroTotalR3);
         
         System.out.println("----------------------------------------------------\n");
-        
+        //somatoria de todos os lucros 
         lucroTotal = lucroTotalR1 + lucroTotalR2 + lucroTotalR3;
         System.out.println("O lucro TOTAL de vendas é: R$ " + lucroTotal);
        
