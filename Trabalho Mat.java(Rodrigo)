@@ -58,7 +58,7 @@ public class JavaMatematica {
              cocoR3 = ler.nextInt();
          System.out.print("----------------------------------------------------------------------\n");    
             
-         System.out.println("COMPRAS. ");
+         System.out.println("COMPRAS\n. ");
         
          System.out.println("Olá! Abaixo digite o preço dos produtos.\n");
          
@@ -76,6 +76,7 @@ public class JavaMatematica {
          pi6 = ler.nextFloat();
          System.out.println("---------------------------------------------------\n");
          
+         System.out.println("CONTROLE DE ESTOQUE\n. ");
 
          System.out.println("\nOlá! Abaixo digite o peso dos produtos em grama.");
          System.out.println("--------------------------------------------------\n");
@@ -126,36 +127,62 @@ public class JavaMatematica {
          //preco5 = qtdI5 * pi5;
          //preco6 = qtdI6 * pi6;
          
-        if (qtdI1 + e1 >= choc && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI4 + e4 >= leitpoR1) {
-            System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de Leite Ninho. ");
-        }
-        if (qtdI1 + e1 >= choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI4 + e4 >= leitpoR1 * 2) {
-            System.out.println("Temos ingredientes suficientes para 2 receitas de BomBom de Leite Ninho. ");
-        }
-        if (qtdI1 + e1 >= choc * 3 && qtdI2 + e2 >= leitcond * 3 && qtdI3 + e3 >= marg * 3 && qtdI4 + e4 >= leitpoR1 * 3) {
-            System.out.println("Temos ingredientes suficientes para 3 receitas de BomBom de Leite Ninho. ");
-        }
-
-        if (qtdI1 + e1 >= choc && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI5 + e5 >= cafeR2) {
-            System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de Cafe. ");
-        }
-        if (qtdI1 + e1 >= choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI5 + e5 >= cafeR2 * 2) {
-            System.out.println("Temos ingredientes suficientes para 2 receitas de BomBom de Cafe. ");
-        }
-        if (qtdI1 + e1 >= choc * 3 && qtdI2 + e2 >= leitcond * 3 && qtdI3 + e3 >= marg * 3 && qtdI5 + e5 >= cafeR2 * 3) {
-            System.out.println("Temos ingredientes suficientes para 3 receitas de BomBom de Cafe. ");
-        }
-
-        if (qtdI1 + e1 >= choc && qtdI2 + e2 >= leitcond && qtdI3 + e3 >= marg && qtdI6 + e6 >= cocoR3) {
-            System.out.println("Temos ingredientes suficientes para 1 receita de BomBom de coco. ");
-        }
-        if (qtdI1 + e1 >= choc * 2 && qtdI2 + e2 >= leitcond * 2 && qtdI3 + e3 >= marg * 2 && qtdI6 + e6 >= cocoR3 * 2) {
-            System.out.println("Temos ingredientes suficientes para 2 receitas de BomBom de coco. ");
-        }
-        if (qtdI1 + e1  >= choc * 3 && qtdI2 + e2 >= leitcond * 3 && qtdI3 + e3 >= marg * 3 && qtdI6 + e6 >= cocoR3 * 3) {
-            System.out.println("Temos ingredientes suficientes para 3 receitas de BomBom de coco. ");
-        }
+        // À seguir a implementação para conferir se a ou não possibilidade de fazer alguma receita   
+        int quantre1;
+        quantre1 = Math.min(qtdI1 / choc,
+                Math.min(qtdI2 / leitcond,
+                        Math.min(qtdI3 / marg,
+                                qtdI4 / leitpoR1)));
+        if (quantre1 >= 1){ 
+        System.out.println("Podem ser feitas " + quantre1 + " receitas de BomBom(s) de leite ninho");}
+        if (quantre1 < 1){ 
+        System.out.println("Não é possivel fazer nenhuma recheita de BomBom de leite ninho");}
+        
+         int quantre2 = Math.min(qtdI1 / choc,
+                Math.min(qtdI2 / leitcond,
+                        Math.min(qtdI3 / marg,                              
+                                qtdI5 / cafeR2)));
+         if (quantre2 >= 1){
+         System.out.println("Podem ser feitas " + quantre2 + " receitas de BomBom(s) de café soluvel");}
+         if (quantre1 < 1){ 
+        System.out.println("Não é possivel fazer nenhuma recheita de BomBom de café soluvel");}
+         
+         int quantre3 = Math.min(qtdI1 / choc,
+                Math.min(qtdI2 / leitcond,
+                        Math.min(qtdI3 / marg,                              
+                                qtdI6 / cocoR3)));
+         if (quantre3 >= 1){
+         System.out.println("Podem ser feitas " + quantre3 + " receitas de BomBom(s) de coco");}
+         if (quantre1 < 1){ 
+        System.out.println("Não é possivel fazer nenhuma recheita de BomBom de coco");}
+         
+        System.out.print("\nEstoque remanecente: \n");
         System.out.print("------------------------------------------------------------\n");
+        
+        e1 = qtdI1 - choc * quantre1;
+         System.out.println("Sua quantidade de chocolate restante é " + e1 + "g.");
+         
+         e2 = qtdI2 - leitcond * quantre1;
+         System.out.println("Sua quantidade de leite condensado restante é " + e2 + "g.");
+         
+         e3 = qtdI3 - marg * quantre1;
+         System.out.println("Sua quantidade de margarina restante é " + e3 + "g.");
+         
+         e4 = qtdI4 - leitpoR1 * quantre1;
+         System.out.println("Sua quantidade de leite em pó restante é " + e4 + "g.");
+         
+         e5 = qtdI5 - cafeR2 * quantre2;
+         System.out.println("Sua quantidade de café soluvel restante é " + e5 + "g.");
+         
+         e6 = qtdI6 - cocoR3 * quantre3;
+         System.out.println("Sua quantidade de coco ralado restante é " + e6 + "g.");
+
+         
+        System.out.print("------------------------------------------------------------\n");
+        
+        System.out.println("FINANCEIRO/VENDAS\n. ");
+            //custoR1 = a custo unitatio de cada BomBom...
+            //custochoc1 = custo de cada ingrediente ...
         
          float custoR1, custoR2, custoR3, qtdbombomR = 50;
          float custobombomR1, custobombomR2, custobombomR3;
@@ -164,7 +191,7 @@ public class JavaMatematica {
         System.out.printf("Defina/digite o preço de venda por unidade/bombom em uma receita R$ : ");
         precoV = ler.nextFloat();
              
-             
+         //custo total de todos os ingrediente     
         custoR1 = custochoc1 + custoleitcond2 + customarg3 + custoleitpo4; 
         custoR2 = custochoc1 + custoleitcond2 + customarg3 + custocafe5;    
         custoR3 = custochoc1 + custoleitcond2 + customarg3 + custococo6;
@@ -217,4 +244,3 @@ public class JavaMatematica {
        
     }
 }
-
