@@ -22,14 +22,16 @@ public class JavaMatematica {
             
          int qtdI1 = 0, qtdI2 = 0, qtdI3 = 0, qtdI4 = 0, qtdI5 = 0, qtdI6 = 0;
          int e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0, e6 = 0;
+         int opcao = 0;
+         int freceitas = 0;
          
          float pi1 = 0, pi2 = 0, pi3 = 0, pi4 = 0, pi5 = 0, pi6 = 0;
-         //float preco1 = 0, preco2 = 0, preco3 = 0, preco4 = 0, preco5 = 0, preco6 = 0;
+         float preco1 = 0, preco2 = 0, preco3 = 0, preco4 = 0, preco5 = 0, preco6 = 0;
          float precoV = 0, lucroTotal;
          float lucroUnidR1, lucroUnidR2, lucroUnidR3;
-        
+          
 
-         System.out.println("O MELHOR BOMBOM DE GOIANIA");
+         System.out.println("O MELHOR BOMBOM DE GOIÂNIA");
          System.out.println("----------------------------------------");
          System.out.println("GESTÃO DE COMPRAS, SUPRIMENTOS, PRODUÇÃO E VENDAS. ");
          System.out.println("----------------------------------------");
@@ -115,18 +117,18 @@ public class JavaMatematica {
                         Math.min(qtdI3 / marg,
                                 qtdI4 / leitpoR1)));
         if (quantre1 >= 1){ 
-        System.out.println("Podem ser feitas " + quantre1 + " receitas de BomBom(s) de leite ninho");}
+        System.out.println("Podem ser feitas " + quantre1 + " receitas de BomBom(s) de leite ninho\n ou");}
         if (quantre1 < 1){ 
-        System.out.println("Não é possivel fazer nenhuma recheita de BomBom de leite ninho");}
+        System.out.println("Não é possivel fazer nenhuma receita de BomBom de leite ninho");}
         
          int quantre2 = Math.min(qtdI1 / choc,
                 Math.min(qtdI2 / leitcond,
                         Math.min(qtdI3 / marg,                              
                                 qtdI5 / cafeR2)));
          if (quantre2 >= 1){
-         System.out.println("Podem ser feitas " + quantre2 + " receitas de BomBom(s) de café soluvel");}
+         System.out.println("Podem ser feitas " + quantre2 + " receitas de BomBom(s) de café soluvel\n ou");}
          if (quantre1 < 1){ 
-        System.out.println("Não é possivel fazer nenhuma recheita de BomBom de café soluvel");}
+        System.out.println("Não é possivel fazer nenhuma receita de BomBom de café soluvel");}
          
          int quantre3 = Math.min(qtdI1 / choc,
                 Math.min(qtdI2 / leitcond,
@@ -135,31 +137,85 @@ public class JavaMatematica {
          if (quantre3 >= 1){
          System.out.println("Podem ser feitas " + quantre3 + " receitas de BomBom(s) de coco");}
          if (quantre1 < 1){ 
-        System.out.println("Não é possivel fazer nenhuma recheita de BomBom de coco");}
+        System.out.println("Não é possivel fazer nenhuma receita de BomBom de coco");}
          
+         if (quantre1 < 1 && quantre2 < 1 && quantre3 < 1){ 
+        System.out.println("Não é possivel fazer nenhuma receita");
+        System.exit(0);}
+        
+        System.out.println("---------------------------------------------------");
+        System.out.print("Quantidade de receitas que desejão ser feitas: ");
+        freceitas = ler.nextInt();
+        System.out.println("---------------------------------------------------");
+         
+        while (opcao != 1 && opcao != 2 && opcao != 3 ) {
+            System.out.println("\nSelecione a receita que você deseja proserguir :");
+            System.out.println("1 - leite ninho");
+            System.out.println("2 - café soluvel");
+            System.out.println("3 - BomBom de coco");
+            System.out.print("Opção: ");
+            
+            opcao = ler.nextInt();
+            
+            switch (opcao) {
+                case 1:
+                    System.out.println("Você selecionou a opção 1.");
+                    e1 = qtdI1 - choc * freceitas;
+                    e2 = qtdI2 - leitcond * freceitas;
+                    e3 = qtdI3 - marg * freceitas;
+                    e4 = qtdI4 - leitpoR1 * freceitas;
+                    e5 = qtdI5;
+                    e6 = qtdI6;
+                    break;
+                case 2:
+                    System.out.println("Você selecionou a opção 2.");
+                    e1 = qtdI1 - choc * freceitas;
+                    e2 = qtdI2 - leitcond * freceitas;
+                    e3 = qtdI3 - marg * freceitas;
+                    e4 = qtdI4;
+                    e5 = qtdI5 - cafeR2 * freceitas;
+                    e6 = qtdI6;
+                    break;
+                case 3:
+                    System.out.println("Você selecionou a opção 3.");
+                    e1 = qtdI1 - choc * freceitas;
+                    e2 = qtdI2 - leitcond * freceitas;
+                    e3 = qtdI3 - marg * freceitas;
+                    e4 = qtdI4;
+                    e5 = qtdI5;
+                    e6 = qtdI6 - cocoR3 * freceitas;
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;             
+                
+            }
+            System.out.println();
+        }
+
+        
+        
+        //System.out.print("Qualtas receitas você deseja fazer ? ");
+        //freceitas = ler.nextInt();
+        
         System.out.print("\nEstoque remanecente: \n");
         System.out.print("------------------------------------------------------------\n");
         
-        e1 = qtdI1 - choc * quantre1;
          System.out.println("Sua quantidade de chocolate restante é " + e1 + "g.");
          
-         e2 = qtdI2 - leitcond * quantre1;
          System.out.println("Sua quantidade de leite condensado restante é " + e2 + "g.");
          
-         e3 = qtdI3 - marg * quantre1;
          System.out.println("Sua quantidade de margarina restante é " + e3 + "g.");
          
-         e4 = qtdI4 - leitpoR1 * quantre1;
          System.out.println("Sua quantidade de leite em pó restante é " + e4 + "g.");
          
-         e5 = qtdI5 - cafeR2 * quantre2;
          System.out.println("Sua quantidade de café soluvel restante é " + e5 + "g.");
          
-         e6 = qtdI6 - cocoR3 * quantre3;
          System.out.println("Sua quantidade de coco ralado restante é " + e6 + "g.");
          
          
         System.out.print("------------------------------------------------------------\n");
+         System.out.println("FINANCEIRO/VENDAS\n ");
         //custoR1 = a custo unitatio de cada BomBom...
         //custochoc1 = custo de cada ingrediente ...
          float custoR1, custoR2, custoR3, qtdbombomR = 50;
@@ -175,11 +231,11 @@ public class JavaMatematica {
         custoR3 = custochoc1 + custoleitcond2 + customarg3 + custococo6;
              
         custobombomR1 = (custoR1/qtdbombomR); //custo da receita 1 dividido pela quantidade de bombom que são 50 por receita.
-        System.out.printf("O custo unitário do bombom de chocolate é R$ " + custobombomR1);
+        System.out.printf("O custo unitário do bombom de chocolate é R$ %.2f" , custobombomR1);
         custobombomR2 = (custoR2/qtdbombomR);
-        System.out.printf("\nO custo unitário do bombom de café é R$ " + custobombomR2);
+        System.out.printf("\nO custo unitário do bombom de café é R$ %.2f" , custobombomR2);
         custobombomR3 = (custoR3/qtdbombomR);
-        System.out.printf("\nO custo unitário do bombom de coco é R$ " + custobombomR3);
+        System.out.printf("\nO custo unitário do bombom de coco é R$ %.2f" , custobombomR3);
              
         float qtvendidaR1, qtvendidaR2, qtvendidaR3;
              //float registroVendaR1 = 0, registroVendaR2 = 0, registroVendaR3 = 0;
@@ -198,27 +254,27 @@ public class JavaMatematica {
         System.out.print("---------------------------------------------------\n");     
         // lucro de unidade vendida      
         lucroUnidR1 = precoV - custobombomR1;
-        System.out.println("Lucro unitário das vendas de Bombons de Chocolate: R$ " + lucroUnidR1);
+        System.out.printf("Lucro unitário das vendas de Bombons de Chocolate: R$ %.2f\n" , lucroUnidR1);
         lucroUnidR2 = precoV - custobombomR2;
-        System.out.println("Lucro unitário das vendas de Bombons de Café: R$ " + lucroUnidR2);
+        System.out.printf("Lucro unitário das vendas de Bombons de Café: R$ %.2f\n" , lucroUnidR2);
         lucroUnidR3 = precoV - custobombomR3;
-        System.out.println("Lucro unitário das vendas de Bombons de Coco: R$ " + lucroUnidR3);
+        System.out.printf("Lucro unitário das vendas de Bombons de Coco: R$ %.2f \n" , lucroUnidR3);
              
         System.out.print("---------------------------------------------------\n"); 
         
         float lucroTotalR1, lucroTotalR2, lucroTotalR3;
         // lucro de cada receita pela quantidade de BomBons vendidos 
         lucroTotalR1 = (lucroUnidR1 * qtvendidaR1);
-        System.out.println("O lucro TOTAL de vendas de Bombons de Chocolate é: R$ " + lucroTotalR1);
+        System.out.printf("O lucro TOTAL de vendas de Bombons de Chocolate é: R$ %.2f\n" , lucroTotalR1);
         lucroTotalR2 = (lucroUnidR2 * qtvendidaR2);
-        System.out.println("O lucro TOTAL de vendas de Bombons de Café é: R$ " + lucroTotalR2);
+        System.out.printf("O lucro TOTAL de vendas de Bombons de Café é: R$ %.2f\n" , lucroTotalR2);
         lucroTotalR3 = (lucroUnidR3 * qtvendidaR3);
-        System.out.println("O lucro TOTAL de vendas de Bombons de Coco é: R$ " + lucroTotalR3);
+        System.out.printf("O lucro TOTAL de vendas de Bombons de Coco é: R$ %.2f\n", lucroTotalR3);
         
         System.out.println("----------------------------------------------------\n");
         //somatoria de todos os lucros 
         lucroTotal = lucroTotalR1 + lucroTotalR2 + lucroTotalR3;
-        System.out.println("O lucro TOTAL de vendas é: R$ " + lucroTotal);
+        System.out.printf("O lucro TOTAL de vendas é: R$ %.2f " , lucroTotal);
        
     }
 }
