@@ -1,6 +1,6 @@
-
 package filme;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -71,14 +71,28 @@ public class Cinema {
     public void exibirSalas() {
         if (salas.isEmpty()) {
            System.out.println("Nenhuma sala cadastrada.");
-    } else {
-        System.out.println("Salas cadastradas:");
-        for (Sala sala : salas) {
-            System.out.println("Nome: " + sala.getNome());
+        } else {
+           System.out.println("Salas cadastradas:");
+              for (Sala sala : salas) {
+                 System.out.println("Nome: " + sala.getNome());
+            }
         }
     }
-}
-
+    
+    public void exibirSessoes() {
+    if (sessoes.isEmpty()) {
+        System.out.println("Nenhuma sessão cadastrada.");
+        } else {
+         System.out.println("Sessões cadastradas:");
+            for (Sessao sessao : sessoes) {
+               System.out.println("Filme: " + sessao.getFilme().getTitulo());
+               System.out.println("Sala: " + sessao.getSala().getNome());
+               System.out.println("Data e Hora: " + sessao.getDataHora());
+               System.out.println("---------------------------");
+            }
+        }
+    }
+     
     public static void main(String[] args) {
         Cinema cinema = new Cinema();
         try (Scanner scanner = new Scanner(System.in)) {
@@ -90,8 +104,9 @@ public class Cinema {
                 System.out.println("2. Cadastrar sala");
                 System.out.println("3. Cadastrar sessão");
                 System.out.println("4. Exibir filmes cadastrados");
-                System.out.println("5. Exibir salas cadastradas");              
-                System.out.println("6. Sair");
+                System.out.println("5. Exibir salas cadastradas"); 
+                System.out.println("6. Exibir sessões cadastradas");
+                System.out.println("7. Sair");
                 System.out.print("Escolha uma opção: ");
                 opcao = scanner.nextInt();
                 
@@ -118,17 +133,19 @@ public class Cinema {
                     String salaSessao = scanner.nextLine();
                     System.out.print("Digite a data e hora da sessão (yyyy-mm-dd hh:mm): ");
                     String dataHoraSessao = scanner.nextLine();
-                    LocalDateTime dataHora = LocalDateTime.of(2023, 6, 12, 18, 30); 
+                    LocalDateTime dataHora = LocalDateTime.parse(dataHoraSessao, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                     cinema.cadastrarSessao(tituloSessao, salaSessao, dataHora);
                     }
                 case 4 -> cinema.exibirFilmes();
                 case 5 -> cinema.exibirSalas();
-                case 6 -> System.out.println("Encerrando o programa...");
+                case 6 -> cinema.exibirSessoes();
+                case 7 -> System.out.println("Encerrando o programa...");
                 default -> System.out.println("Opção inválida.");
             }
-        } while (opcao != 6);
+        } while (opcao != 7);
 
         scanner.close();
         }
     }
 }
+
