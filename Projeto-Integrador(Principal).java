@@ -1,6 +1,7 @@
 //classe Projeto
 
 //Importando classes e bibliotecas
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -100,10 +101,10 @@ public class Projeto {
     //Informações do projeto
     public String toString() {
         return "\nProjeto: " + nome + "\nDescrição: " + descricao + "\nData Início do Projeto: " + dataIncioProjeto
-                + "\nData Final do Projeto" + dataFimProjeto +  "\nPercentual concluído:" + getPercentualProjeto() + "%";
+                + "\nData Final do Projeto" + dataFimProjeto + "\n" + getAreas() + "\nPercentual concluído:"
+                + getPercentualProjeto() + "%";
     }
 }
-
 
 //Classe atividade
 
@@ -203,19 +204,16 @@ public class Acao {
     private String nomeAcao;
     private Date dataInicio;
     private Date dataTermino;
-    private String areaResponsavel;
     private String usuarioResponsavel;
     private int progresso; // Em percentagem de 0 a 100.
     private StatusAcao status;
     private List<Usuario> usuarios;
 
-    /*Construtor onde já recebe como parâmetros: nome da ação, data início, data fim, área
-     responsável e usuário responsável. */
-    public Acao(String nomeAcao, Date dataInicio, Date dataTermino, String areaResponsavel) {
+    //Construtor onde já recebe como parâmetros: nome da ação, data início, data fim e usuário responsável
+    public Acao(String nomeAcao, Date dataInicio, Date dataTermino, String usuarioResponsavel) {
         this.nomeAcao = nomeAcao;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
-        this.areaResponsavel = areaResponsavel;
         this.usuarioResponsavel = usuarioResponsavel;
         this.progresso = 0;
         this.status = StatusAcao.A_FAZER; // Inicializa como A FAZER
@@ -274,9 +272,6 @@ public class Acao {
         return status;
     }
 
-    public String getAreaResponsavel() {
-        return areaResponsavel;
-    }
 
     public String getUsuarioResponsavel() {
         return usuarioResponsavel;
@@ -314,8 +309,12 @@ public class Area {
     public String getNome() {
         return nome;
     }
-}
 
+    @Override
+    public String toString() {
+        return "Área: " + nomeArea;
+    }
+}
 
 
 //Classe Empresa
@@ -942,7 +941,6 @@ public class Menu {
                     System.out.println("\t\t\tProgresso: " + acao.progresso() + "%");
                     System.out.println("\t\t\tData de Início: " + acao.getDataInicio());
                     System.out.println("\t\t\tData de Término: " + acao.getDataFim());
-                    System.out.println("\t\t\tÁrea Responsável: " + acao.getAreaResponsavel());
                     System.out.println("\t\t\tUsuário Responsável: " + acao.getUsuarioResponsavel());
                 }
             }
