@@ -1,7 +1,6 @@
 //classe Projeto
 
 //Importando classes e bibliotecas
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ public class Projeto {
         this.areas = new ArrayList<>();
     }
 
-    //Declarando metodos da classe Projeto get e set
+    //Declarando getters e setters
     public String getNome() {
         return nome;
     }
@@ -106,6 +105,7 @@ public class Projeto {
     }
 }
 
+
 //Classe atividade
 
 import java.util.ArrayList;
@@ -167,7 +167,7 @@ public class Atividades {
         }
     }
 
-    //Gets e Sets
+    //Getters e Setters
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -186,7 +186,7 @@ public class Atividades {
 
 
     @Override
-    //Descrição da atividade
+    //Informações da atividade
     public String toString() {
         return "\nAtividade: " + nomeAtividade +"\nData Início: " + dataInicio +
                 "\nData Final: " + dataTermino + "\nPercentual Concluído: " + getPercentualAtividade() + "%";
@@ -207,6 +207,7 @@ public class Acao {
     private String usuarioResponsavel;
     private int progresso; // Em percentagem de 0 a 100.
     private StatusAcao status;
+    private String aviso;
     private List<Usuario> usuarios;
 
     //Construtor onde já recebe como parâmetros: nome da ação, data início, data fim e usuário responsável
@@ -235,7 +236,7 @@ public class Acao {
     //Método que verifica se a ação foi concluída dentro do prazo
     private void verificarDataFim() {
         if (new Date().after(dataTermino) && progresso < 100) {
-            System.out.println("Aviso: Ação '" + nomeAcao + "' não foi concluída até a data fim.");
+            System.out.println(aviso = "Aviso: Ação '" + nomeAcao + "' não foi concluída até a data fim.");
         }
     }
 
@@ -276,6 +277,9 @@ public class Acao {
     public String getUsuarioResponsavel() {
         return usuarioResponsavel;
     }
+    public String getAviso() {
+        return aviso;
+    }
     // Método para adicionar usuário associado à ação
     public void adicionarUsuario(Usuario usuario) {
         usuarios.add(usuario);
@@ -285,7 +289,7 @@ public class Acao {
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
-
+    //Informações da ação
     @Override
     public String toString() {
         return "\n\nAção: " + nomeAcao + "\nPercentual Concluído: " + progresso + "%" +
@@ -295,21 +299,24 @@ public class Acao {
 
 
 //Classe Area
+
 public class Area {
     private String nomeArea;
     private String nome;
 
+    //Construtor que recebe o  nomem da area como parâmetro
     public Area(String nomeArea) {
         this.nomeArea = nomeArea;
     }
 
+    //Getters e setters
     public String getNomeArea() {
         return nomeArea;
     }
     public String getNome() {
         return nome;
     }
-
+    //Informações da área
     @Override
     public String toString() {
         return "Área: " + nomeArea;
@@ -323,25 +330,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Empresa {
+    //Declarando atributos da empresa
     private String nome;
     private List<Projeto> projetos;
     private List<Area> areas;
 
+    //Construtor sem parâmetros
     public Empresa() {
         this.projetos = new ArrayList<>();
         this.areas = new ArrayList<>();
     }
 
+    //Construtor que recebe um parâmtro e instância arrays de projeto e area
     public Empresa(String nome) {
         this.nome = nome;
         this.projetos = new ArrayList<>();
         this.areas = new ArrayList<>();
     }
 
+    //Adicionando projetos dentro da arrayList
     public void adicionarProjeto(Projeto projeto) {
         projetos.add(projeto);
     }
 
+    //Getters e setters
     public String getNome() {
         return nome;
     }
@@ -377,11 +389,29 @@ public enum StatusAcao {
 //Classe Usuario
 
 public class Usuario {
+    //Atributos da classe
     private String nome;
+    private String senha;
     private String perfilUsuario;
 
-    public Usuario(String nome) {
+    //Construtor que recebe dois parâmetros
+    public Usuario(String nome, String senha) {
         this.nome = nome;
+        this.senha = senha;
+    }
+
+    //Construtor que recebe apenas um parâmtro
+    public Usuario(String nomeUsuario){
+        this.nome = nomeUsuario;
+    }
+
+    //Getters e setters
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -395,24 +425,15 @@ public class Usuario {
     public void setPerfilUsuario(String perfilUsuario) {
         this.perfilUsuario = perfilUsuario;
     }
-}
 
-
-
-//Classe Valida
-//para validar senha
-public class Valida {
-
-    private String nome;
-    private String senha;
-
-    public Valida(String nome, String senha){
-        this.nome = nome;
-        this.senha = senha;
+    //Método para validar o nome de usuário
+    public boolean validarNome(String validaNome){
+        return validaNome.equals(nome);
     }
 
-    public boolean validarSenha(String validasenha){
-        return validasenha.equals(senha);
+    //Método para validar a senha de usuário
+    public boolean validarSenha(String validaSenha){
+        return validaSenha.equals(senha);
     }
 }
 
@@ -425,6 +446,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Menu {
+    //Atributos da classe Menu
+    Usuario usuario;
     private Scanner scanner;
     private Empresa empresa;
     private int perfilUsuario;
@@ -436,7 +459,7 @@ public class Menu {
     private Map<String, Acao> nomesAções;
     private Map<String, Usuario> nomeUsuarios;
 
-
+    //Construtor sem parâmetros da classe menu que instância objetos e inicializa atributos
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.empresa = new Empresa();
@@ -451,6 +474,7 @@ public class Menu {
 
     }
 
+    //Método principal que chama outras classes e métodos pertencentes a classe Menu
     public void exibirMenu() {
         int escolha;
         try {
@@ -500,6 +524,7 @@ public class Menu {
 
     }
 
+    //Exibir opções de acordo com o perfil do usuário
     private void exibirOpcoes() {
 
         switch (perfilUsuario) {
@@ -532,7 +557,7 @@ public class Menu {
         System.out.println();
     }
 
-
+    //Opções do administrador
     private void processarOpcaoAdministrador(int escolha) {
         switch (escolha) {
             case 1:
@@ -560,6 +585,7 @@ public class Menu {
         }
     }
 
+    //Opções do lider do projeto
     private void processarOpcaoLiderProjeto(int escolha) throws ParseException {
         switch (escolha) {
             case 1:
@@ -587,6 +613,7 @@ public class Menu {
         }
     }
 
+    //Opções do usuário
     private void processarOpcaoUsuario(int escolha) {
         switch (escolha) {
             case 1:
@@ -607,7 +634,7 @@ public class Menu {
                 break;
         }
     }
-
+    //Cadastro da area que pertence as opções do administrador
     private void cadastrarArea() {
         System.out.println("Digite o nome da área: ");
         String nomeArea = scanner.nextLine();
@@ -615,19 +642,24 @@ public class Menu {
         areasCadastradas.put(nomeArea, area);
         System.out.println("\nÁrea cadastrada com sucesso!");
     }
-
+    //ArrayList de areas cadastradas
     public Map<String, Area> getAreasCadastradas() {
         return areasCadastradas;
     }
 
+    //Cadastro do usuário que pertencem as opções do administrador
     private void cadastrarUsuario() {
         System.out.println("Digite o nome do usuário: ");
         String nomeUsuario = scanner.nextLine();
-        Usuario usuario = new Usuario(nomeUsuario);
+        System.out.println("Digite a senha do usuário: ");
+        String senhaUsuario = scanner.nextLine();
+        usuario = new Usuario(nomeUsuario, senhaUsuario);
         nomeUsuarios.put(nomeUsuario, usuario);
         System.out.println("\nUsuário cadastrado com sucesso!");
+        exibirMenu();
     }
 
+    //Lista para exibir os usuários cadastrados
     private void exibirUsuariosCadastrados() {
         System.out.println("\nLista de Usuários Cadastrados:");
         for (String nomeUsuario : usuariosCadastrados.keySet()) {
@@ -635,70 +667,119 @@ public class Menu {
         }
     }
 
+    //Metodo para definir o tipo de usário sendo 1 - administrador 2- lider do projeto 3- Funcionário
     private int definirPerfilUsuario() {
         int perfil;
         try {
-            System.out.println("\n** Vamos cadastrar uma conta de entrada **");
-            System.out.println("\nInforme o nome: ");
-            String nome = scanner.nextLine();
-            System.out.println("Informe a senha: ");
-            String senha = scanner.nextLine();
+            System.out.println("Digite o perfil de usuário\n1 - Administrador\n2 - Líder do projeto" +
+                    "\n3 - Funicionário");
+            perfil = scanner.nextInt();
 
-            Valida valida = new Valida(nome, senha);
-            System.out.println("\nConta cadastrada!\n");
+            //Validando perfil do funcionário
+            if(perfil == 3){
+                try {
+                    scanner.nextLine();
+                    System.out.println("Infome o nome do funcionário: ");
+                    String validaNome = scanner.nextLine();
+                    System.out.println("Infome a senha de funcionário: ");
+                    String validaSenhaa = scanner.nextLine();
 
-            int x = 1;
-            while (x == 1) {
-                System.out.println("Fazer longin\nInforme a senha cadastrada: ");
+                    if (usuario.validarNome(validaNome)) {
+                        if (usuario.validarSenha(validaSenhaa)) {
+                            System.out.println("Nome e senha corretos!");
+                        } else {
+                            System.out.println("Senha incorreta!!");
+                        }
+                    } else {
+                        System.out.println("Nome incorreto!!");
+                    }
+                }catch (NullPointerException e){
+                    System.out.println("Não há funcionário cadastrado!");
+                    return solicitarPerfilUsuario();
+                }
+
+            }
+
+            while (perfil != 1 && perfil != 2 && perfil != 3) {
+                System.out.println("\nPerfil de usuário não reconhecido.\nTente novamente.");
+                System.out.println("Digite o perfil de usuário:\n1- Administrador\n2 - Líder do projeto" +
+                        "\n3 - Usuário");
+                perfil = scanner.nextInt();
+            }
+            return perfil;
+
+        }catch (InputMismatchException e){
+            System.out.println("Entrada incorreta\n");
+            return solicitarPerfilUsuario();
+        }
+    }
+
+    //Outro método para definir o tipo de usuário
+    private int solicitarPerfilUsuario() {
+        try {
+            scanner.nextLine();
+            System.out.println("Digite o perfil de usuário\n1 - Administrador\n2 - Líder do projeto\n3 - Funcionário");
+            perfilUsuarioAnterior = perfilUsuario;  // Adicione esta linha
+            perfilUsuario = scanner.nextInt();
+
+            if (perfilUsuario == 3) {
+                scanner.nextLine();
+                System.out.println("Infome o nome do funcionário: ");
+                String validaNome = scanner.nextLine();
+                System.out.println("Infome a senha de funcionário: ");
                 String validaSenha = scanner.nextLine();
 
-                if (valida.validarSenha(validaSenha)) {
-                    System.out.println("Senha correta!!");
-                    System.out.println("\n*** Bem vindo ao Kanban ***\n");
-
-                    System.out.println("Digite o perfil de usuário\n1 - Administrador\n2 - Líder do projeto" +
-                            "\n3 - Usuário");
-                    perfil = scanner.nextInt();
-                    scanner.nextLine();
-
-                    while (perfil != 1 && perfil != 2 && perfil != 3) {
-                        System.out.println("Perfil de usuário não reconhecido.\nTente novamente.");
-                        System.out.println("Digite o perfil de usuário:\n1- Administrador\n2 - Líder do projeto" +
-                                "\n3 - Usuário");
-                        perfil = scanner.nextInt();
+                if (usuario.validarNome(validaNome)) {
+                    if (usuario.validarSenha(validaSenha)) {
+                        System.out.println("Nome e senha corretos!");
+                    } else {
+                        System.out.println("Senha incorreta!!");
+                        solicitarPerfilUsuario();
                     }
-                    return perfil;
-
                 } else {
-                    System.out.println("Senha incorreta!!");
-                    System.out.println("\nPara tentar novamente digite 1 ou para sair digite 2: ");
-                    x = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.println("Nome incorreta!!");
+                    solicitarPerfilUsuario();
                 }
             }
-            if (x == 2) {
-                fimDaLinha();
+
+            while (perfilUsuario != 1 && perfilUsuario != 2 && perfilUsuario != 3) {
+                System.out.println("\nPerfil de usuário não reconhecido.\nTente novamente.");
+                System.out.println("Digite o perfil de usuário\n1 - Administrador\n2 - Líder do projeto\n3 - Funcionário");
+                perfilUsuario = scanner.nextInt();
+                //validando perfil do funcionário
+
+                if (perfilUsuario == 3) {
+                    scanner.nextLine();
+                    System.out.println("Infome o nome do funcionário: ");
+                    String validaNome = scanner.nextLine();
+                    System.out.println("Infome a senha de funcionário: ");
+                    String validaSenha = scanner.nextLine();
+
+                    if (usuario.validarNome(validaNome)) {
+                        if (usuario.validarSenha(validaSenha)) {
+                            System.out.println("Nome e senha corretos!");
+                        } else {
+                            System.out.println("Senha incorreta!!");
+                            solicitarPerfilUsuario();
+                        }
+                    } else {
+                        System.out.println("Nome incorreto!!");
+                        solicitarPerfilUsuario();
+                    }
+
+                }
+                return perfilUsuario;
+
             }
-            return 0;
-        }catch (InputMismatchException e){
-            System.out.println("Entrada incorreta.\nUtilizando entrada padrão 1 - administrador!");
-            perfil = 1;
-            return perfil;
+            return perfilUsuario;
+        }catch (InputMismatchException u){
+            System.out.println("Entrada incorreta\n");
+            solicitarPerfilUsuario();
         }
+        return perfilUsuario;
     }
 
-    private void solicitarPerfilUsuario() {
-        System.out.println("Digite o perfil de usuário\n1 - Administrador\n2 - Líder do projeto\n3 - Usuário");
-        perfilUsuarioAnterior = perfilUsuario;  // Adicione esta linha
-        perfilUsuario = scanner.nextInt();
-        while (perfilUsuario != 1 && perfilUsuario != 2 && perfilUsuario != 3) {
-            System.out.println("\nPerfil de usuário não reconhecido.\nTente novamente.");
-            System.out.println("Digite o perfil de usuário\n1 - Administrador\n2 - Líder do projeto\n3 - Usuário");
-            perfilUsuario = scanner.nextInt();
-        }
-    }
-
-
+    //Método que cadastra empresa pertencente as opções do administrador
     private void cadastrarEmpresa() {
         System.out.println("Digite o nome da empresa: ");
         String nomeEmpresa = scanner.nextLine();
@@ -706,6 +787,7 @@ public class Menu {
         System.out.println("\nEmpresa cadastrada com sucesso!");
     }
 
+    //Método que cadastra projetos pertencente as apções do lider do projeto
     private void cadastrarProjeto() {
         try {
             System.out.println("Digite o nome do projeto: ");
@@ -753,6 +835,7 @@ public class Menu {
         }
     }
 
+    //Método para encontrar área
     private Area encontrarAreaPorNome(String nomeArea) {
         for (Area area : empresa.getAreas()) {
             if (area.getNome().equals(nomeArea)) {
@@ -762,6 +845,7 @@ public class Menu {
         return null;
     }
 
+    //Método para cadastrar a atividade pertencente as opções do lider do projeto
     private void cadastrarAtividade() {
         Projeto projeto = escolherProjeto();
         if (projeto != null) {
@@ -793,7 +877,7 @@ public class Menu {
         }
     }
 
-
+    //Metodo para vincular o projeto as atividades e ações
     private Projeto escolherProjeto() {
         System.out.println("\nLista de projetos cadastrados:");
         for (String nomeProjeto : nomesProjetos.keySet()) {
@@ -811,6 +895,7 @@ public class Menu {
         return null;
     }
 
+    //Método para vincular a atividade as ações
     private Atividades escolherAtividade(Projeto projeto) {
         System.out.println("\nLista de Atividades cadastradas:");
         for (String nomeAtividade: nomesAtividades.keySet()) {
@@ -827,6 +912,7 @@ public class Menu {
         return null;
     }
 
+    //Método para cadastrar ações referente as opções do lider do projeto
     private void cadastrarAcao() {
         Projeto projeto = escolherProjeto();
         if (projeto != null) {
@@ -885,7 +971,7 @@ public class Menu {
             }
         }
     }
-
+    //Método para encontras as ações por nome
     private Acao encontrarAcaoPorNome(String nomeAcao) {
         for (Projeto projeto : empresa.getProjetos()) {
             for (Atividades atividade : projeto.getAtividades()) {
@@ -899,8 +985,9 @@ public class Menu {
         return null;  // Retorna null se a ação não for encontrada
     }
 
+    //Método para atualizar o status da açõa pertencente as opções do funcionário
     private void atualizarStatusDaAcao() {
-
+        //Lista de ações cadastradas
         System.out.println("\nLista de Ações Cadastradas:");
         for (String nomeAcao : nomesAções.keySet()) {
             System.out.println(nomeAcao);
@@ -925,7 +1012,7 @@ public class Menu {
         }
     }
 
-
+    //Método para vizualizar as informações do quadro kanban, onde visualizamos o projetos, atividades e ações
     private void visualizarQuadroKanban() {
         System.out.println("========================== Quadro Kanban ==============================");
 
@@ -942,15 +1029,14 @@ public class Menu {
                     System.out.println("\t\t\tData de Início: " + acao.getDataInicio());
                     System.out.println("\t\t\tData de Término: " + acao.getDataFim());
                     System.out.println("\t\t\tUsuário Responsável: " + acao.getUsuarioResponsavel());
+                    if(acao.getAviso() != null){
+                        System.out.println("\t\t\t" + acao.getAviso());
+                    }
                 }
             }
         }
 
         System.out.println("==================================================================================");
-    }
-    public void fimDaLinha(){
-        System.out.println("Fim da linha");
-        System.exit(0);
     }
 
     public static void main(String[] args) {
@@ -965,7 +1051,9 @@ import java.text.ParseException;
 
 public class Principal {
     public static void main(String[] args) throws ParseException {
+        //Instanciando a classe Menu
         Menu menu = new Menu();
+        //Chamando o metodo exibirMenu da classe Menu
         menu.exibirMenu();
 
     }
