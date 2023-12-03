@@ -106,7 +106,7 @@ public class Projeto {
 }
 
 
-//Classe atividade
+//Classe atividades
 
 import java.util.ArrayList;
 import java.util.Date;
