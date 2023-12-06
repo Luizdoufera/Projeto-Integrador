@@ -1014,29 +1014,45 @@ public class Menu {
 
     //Método para vizualizar as informações do quadro kanban, onde visualizamos o projetos, atividades e ações
     private void visualizarQuadroKanban() {
-        System.out.println("========================== Quadro Kanban ==============================");
+    System.out.println("\t============================== Relatório ==============================\n");
 
-        for (Projeto projeto : empresa.getProjetos()) {
-            System.out.println(projeto);
+    for (Projeto projeto : empresa.getProjetos()) {
+        System.out.println("\tProjeto: " + projeto.getNome() + "= " + projeto.getPercentualProjeto() + "% concluído.\n");
 
-            for (Atividades atividade : projeto.getAtividades()) {
-                System.out.println(atividade);
+        for (Atividades atividade : projeto.getAtividades()) {
+            System.out.println("\tAtividade: " + atividade.getDescricao() + "= " + atividade.getPercentualAtividade() + "% concluído.\n");
 
-                for (Acao acao : atividade.getAcoes()) {
-                    System.out.println("\t\tAção: " + acao.getNome());
-                    System.out.println("\t\t\tstatus: " + acao.getStatus());
-                    System.out.println("\t\t\tProgresso: " + acao.progresso() + "%");
-                    System.out.println("\t\t\tData de Início: " + acao.getDataInicio());
-                    System.out.println("\t\t\tData de Término: " + acao.getDataFim());
-                    System.out.println("\t\t\tUsuário Responsável: " + acao.getUsuarioResponsavel());
-                    if(acao.getAviso() != null){
-                        System.out.println("\t\t\t" + acao.getAviso());
-                    }
+            // Listar ações cadastradas
+            System.out.println("\tAções cadastradas:\n");
+            for (Acao acao : atividade.getAcoes()) {
+                System.out.println("\t-> " + acao.getNome() + "= " + acao.progresso() + "% concluído" + " | Data inicial: " + acao.getDataInicio() + " | Data limite: " + acao.getDataFim() + "| Responsavel: " + acao.getUsuarioResponsavel());
+            }
+
+            System.out.println("\n\t========================== Quadro Kanban ==========================");
+            System.out.println("\tStatus:");
+            System.out.println("\t|            A FAZER            |            EM ANDAMENTO            |            FEITO             |\n");
+
+            // Exibir as ações com base no status
+            for (Acao acao : atividade.getAcoes()) {
+                StatusAcao statusAcao = acao.getStatus();
+                String tabulacao = "\t";
+
+                // Determinar a tabulação com base no status
+                if (acao.progresso() == 0) {
+                    tabulacao += "";
+                } else if (acao.progresso() < 100) {
+                    tabulacao += "                                ";
+                } else {
+                    tabulacao += "                                                                     ";
                 }
+
+                // Exibir o nome da ação na posição correta
+                System.out.println(tabulacao + " " + acao.getNome());
             }
         }
+    }
 
-        System.out.println("==================================================================================");
+    System.out.println("\t===================================================================");
     }
 
     public static void main(String[] args) {
