@@ -1,0 +1,42 @@
+from sympy import symbols, simplify
+
+class Function:
+    def __init__(self):
+        self.expression = None
+
+    def set_expression(self, expression):
+        self.expression = expression
+
+    def calculate_derivative(self):
+        if self.expression is None:
+            print("Por favor, defina a expressão da função primeiro.")
+            return None
+        x = symbols('x')
+        derivative = simplify(diff(self.expression, x))
+        return derivative
+
+def main():
+    function = Function()
+
+    while True:
+        print("\n1. Definir a expressão da função")
+        print("2. Calcular a derivada")
+        print("3. Sair")
+
+        choice = input("Escolha uma opção: ")
+
+        if choice == '1':
+            expression = input("Digite a expressão da função: ")
+            function.set_expression(expression)
+        elif choice == '2':
+            derivative = function.calculate_derivative()
+            if derivative is not None:
+                print("Derivada:", derivative)
+        elif choice == '3':
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida. Por favor, escolha uma opção válida.")
+
+if __name__ == "__main__":
+    main()
